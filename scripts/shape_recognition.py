@@ -44,26 +44,26 @@ class ShapeRecognition:
         # Blur the image to remove noise
         blurred = cv2.medianBlur(grey, 5)
 
-        # Adaptively threshold the image to handle
-        # different lighting conditions and colour
-        # better
-        thresh = cv2.adaptiveThreshold(blurred, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 25)
+        # Otsu threshold for the win
+        _, thresh = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
         # Perform erosion to make edges bigger
         # following by Canny edge detection for
         # contour computation
         kernel = np.ones((5,5),np.uint8)
         erosion = cv2.erode(thresh, kernel, iterations = 1)
-        edges = cv2.Canny(erosion, 100, 200)
+        dilate = cv2.dilate(erosion, kernel, iterations = 2)
+        edges = cv2.Canny(dilate, 30, 120)
 
         # TODO: Add laplacian to avoid double edge detection
 
-        # cv2.imshow("grey", grey)
-        # cv2.imshow("blurred", blurred)
-        # cv2.imshow("thresh", thresh)
-        # cv2.imshow("edges", edges)
-        # cv2.imshow("erosion", erosion)
-        # cv2.waitKey(0)
+        cv2.imshow("grey", grey)
+        cv2.imshow("blurred", blurred)
+        cv2.imshow("thresh", thresh)
+        cv2.imshow("edges", edges)
+        cv2.imshow("dilate", dilate)
+        cv2.imshow("erosion", erosion)
+        cv2.waitKey(0)
 
         return edges, ratio
 

@@ -1,8 +1,8 @@
 """
     Script responsible to read-in
     the input image to be counted
-    and carry out the detection and
-    couting processes.
+    and carry out the processing,
+    detection and counting logics.
 """
 
 # Imports
@@ -38,6 +38,7 @@ image = cv2.imread(args["image"])
 for c in cnts:
     # Compute contours center
     M = cv2.moments(c)
+    print(M)
     cX = int((M["m10"] / M["m00"]) * ratio)
     cY = int((M["m01"] / M["m00"]) * ratio)
 
@@ -51,17 +52,17 @@ for c in cnts:
     else:
         triangles += 1
 
-    # # Resize contour to original ratio
-    # c = c.astype("float")
-    # c *= ratio
-    # c = c.astype("int")
-    #
-    # # Draw contour with nearby text
-    # cv2.drawContours(image, [c], -1, (0, 255, 0), 2)
-    # cv2.putText(image, shape, (cX, cY), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+    # Resize contour to original ratio
+    c = c.astype("float")
+    c *= ratio
+    c = c.astype("int")
+
+    # Draw contour with nearby text
+    cv2.drawContours(image, [c], -1, (0, 255, 0), 2)
+    cv2.putText(image, shape, (cX, cY), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
 
 print(str(squares), str(circles), str(triangles))
 
-# # Display image
-# cv2.imshow("Image", image)
-# cv2.waitKey(0)
+# Display image
+cv2.imshow("Image", image)
+cv2.waitKey(0)

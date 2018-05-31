@@ -18,22 +18,6 @@ class Detector:
         """
         pass
 
-    def target(self, approximate):
-        """
-            Returns the target class
-            of the blob based on the approximated contour.
-
-            Arguments:
-                approximate: Approx. contour
-
-            Returns:
-                class: Either triangle, circle, square
-        """
-        return {
-            '3': "triangle",
-            '4': "square"
-        }[approximate]
-
     def detect(self, c):
         """
             The method uses the contour
@@ -43,6 +27,9 @@ class Detector:
 
             Arguments:
                 c: Computed contour of the blob
+
+            Returns:
+                class: Either triangle, circle or square
         """
         # Compute perimeter of the contour
         perimeter = cv2.arcLength(c, True)
@@ -53,4 +40,11 @@ class Detector:
         # intersection of the short lines
         approximate = cv2.approxPolyDP(c, 0.04 * perimeter, True)
 
-        return target(approximate) if target(approximate) else "circle"
+        if len(approximate) == 3:
+            return "triangle"
+
+        elif len(approximate) == 4:
+            return "square"
+
+        else:
+            return "circle"

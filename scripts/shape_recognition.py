@@ -52,7 +52,7 @@ class ShapeRecognition:
         # contour computation
         kernel = np.ones((5,5),np.uint8)
         erosion = cv2.erode(thresh, kernel, iterations = 1)
-        dilate = cv2.dilate(erosion, kernel, iterations = 2)
+        dilate = cv2.dilate(erosion, kernel, iterations = 1)
         edges = cv2.Canny(dilate, 30, 120)
 
         # TODO: Add laplacian to avoid double edge detection

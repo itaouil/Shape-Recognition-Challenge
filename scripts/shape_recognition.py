@@ -57,13 +57,13 @@ class ShapeRecognition:
 
         # TODO: Add laplacian to avoid double edge detection
 
-        cv2.imshow("grey", grey)
-        cv2.imshow("blurred", blurred)
-        cv2.imshow("thresh", thresh)
-        cv2.imshow("edges", edges)
-        cv2.imshow("dilate", dilate)
-        cv2.imshow("erosion", erosion)
-        cv2.waitKey(0)
+        # cv2.imshow("grey", grey)
+        # cv2.imshow("blurred", blurred)
+        # cv2.imshow("thresh", thresh)
+        # cv2.imshow("edges", edges)
+        # cv2.imshow("dilate", dilate)
+        # cv2.imshow("erosion", erosion)
+        # cv2.waitKey(0)
 
         return edges, ratio
 

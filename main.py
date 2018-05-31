@@ -38,7 +38,6 @@ image = cv2.imread(args["image"])
 for c in cnts:
     # Compute contours center
     M = cv2.moments(c)
-    print(M)
     cX = int((M["m10"] / M["m00"]) * ratio)
     cY = int((M["m01"] / M["m00"]) * ratio)
 
@@ -63,6 +62,6 @@ for c in cnts:
 
 print(str(squares), str(circles), str(triangles))
 
-# Display image
-cv2.imshow("Image", image)
-cv2.waitKey(0)
+# # Display image
+# cv2.imshow("Image", image)
+# cv2.waitKey(0)

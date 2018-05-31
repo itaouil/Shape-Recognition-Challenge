@@ -1,1 +1,1 @@
-from detector import Detector
+from shape_recognition import ShapeRecognition

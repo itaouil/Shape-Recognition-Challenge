@@ -7,7 +7,6 @@
 
 # Imports
 import cv2
-import imutils
 import argparse
 import numpy as np
 from scripts import ShapeRecognition
